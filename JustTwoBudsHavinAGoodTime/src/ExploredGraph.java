@@ -137,18 +137,21 @@ public class ExploredGraph {
 			return new Function<Vertex, Boolean>() {
 				@Override
 				public Boolean apply(Vertex vertex) {
-					return false;
+					// if the "from" peg's disk is smaller than the "to" peg's disk
+					return vertex.pegs.get(i).peek() < vertex.pegs.get(j).peek();
 				}
 			};
 		}
 
 		Function<Vertex, Vertex> getTransition() {
-			// TODO: should return a function that can be applied to a vertex
-			// (provided that the precondition is true) to get a "successor"
-			// vertex -- the result of making the move.
+			// TODO: return a function that can be applied to a vertex (provided
+			// that the precondition is true) to get a "successor" vertex -- the 
+			// result of making the move.
 			return new Function<Vertex, Vertex>() {
 				@Override
 				public Vertex apply(Vertex vertex) {
+					Function<Vertex, Boolean> asdf = getPrecondition();
+					
 					return null;
 				}
 			};
@@ -157,7 +160,7 @@ public class ExploredGraph {
 		public String toString() {
 			// TODO: return a string good enough
 			// to distinguish different operators
-			return "";
+			return "Operator " + i + ", " + j;
 		}
 	}
 
