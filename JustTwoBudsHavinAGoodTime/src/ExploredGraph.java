@@ -1,8 +1,10 @@
 import java.util.List;
+import java.util.Queue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Function;
@@ -105,15 +107,26 @@ public class ExploredGraph {
 	} // Implement this.
 	
 	public void bfs(Vertex vi, Vertex vj) {
-		path.clear();
-		path.add(vi);
-		
-		boolean found = bfs(vi, vj, false); 
-		
-		if (!found)
-		{
-			path.clear();
+		Queue<Vertex> list = new LinkedList<Vertex>();
+		list.add(vi);
+		while(!list.isEmpty()) {
+			Vertex current = list.remove();
+			if(!Ve.contains(current)) {
+				Ve.add(current);
+//				Operator op = new Operator()
+			}
 		}
+		
+		
+//		path.clear();
+//		path.add(vi);
+//		
+//		boolean found = bfs(vi, vj, false); 
+//		
+//		if (!found)
+//		{
+//			path.clear();
+//		}
 	} // Implement this.
 	
 	private boolean bfs(Vertex vi, Vertex vj, boolean found) 
