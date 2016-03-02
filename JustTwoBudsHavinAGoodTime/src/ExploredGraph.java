@@ -60,17 +60,32 @@ public class ExploredGraph {
 	}
 		
 	public void dfs(Vertex vi, Vertex vj) {
-//		if (vi.toString().equals(vj.toString())) {
-//			
-//		}
-		boolean found = dfsHelper(vi, vj);
-		if (found) {
-			System.out.println("The vertex was found");
-		} else {
-			path.clear();
-			path = null;
-			System.out.println("The vertex was not found");
+		//while stack not empty
+		//current = pop();
+		//if (!visited) 
+		//   mark visited
+		//   get children
+		//   add children to stack
+		//   
+		Stack<Vertex> list = new Stack<Vertex>();
+		list.push(vi);
+		while(!list.isEmpty()) {
+			Vertex current = list.pop();
+			if(!Ve.contains(current)) {
+				Ve.add(current);
+//				Operator op = new Operator()
+			}
 		}
+		
+			
+//		boolean found = dfsHelper(vi, vj);
+//		if (found) {
+//			System.out.println("The vertex was found");
+//		} else {
+//			path.clear();
+//			path = null;
+//			System.out.println("The vertex was not found");
+//		}
 	}
 	
 	private boolean dfsHelper(Vertex vi, Vertex vj) {
@@ -79,13 +94,7 @@ public class ExploredGraph {
 			return true;
 		} else {
 			ArrayList<Vertex> list = findConnectedVertices(vi); //this should be a stack
-			//while stack not empty
-			//current = pop();
-			//if (!visited) 
-			//   mark visited
-			//   get children
-			//   add children to stack
-			//   
+
 			for (int i = 0; i < list.size(); i++) {
 				if (!path.contains(list.get(i))) {
 					dfs(list.get(i), vj);
