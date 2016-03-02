@@ -39,15 +39,36 @@ public class ExploredGraph {
 		Ee = new LinkedHashSet<Edge>();
 	}
 
-	public void initialize() {
-		// Implement this
+	public void initialize(Vertex v) {
+		Ve.add(v);
 	}
-	public int nvertices() {return 0;} // Implement this.
-	public int nedges() {return 0;}    // Implement this.
-	public void dfs(Vertex vi, Vertex vj) {} // Implement this.
-	public void bfs(Vertex vi, Vertex vj) {} // Implement this.
-	public ArrayList<Vertex> retrievePath(Vertex vi) {return null;} // Implement this.
-	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {return null;} // Implement this.
+	
+	public int nvertices() {
+		return Ve.size();
+	}
+	
+	public int nedges() {
+		return Ee.size();
+	}
+	
+	public void dfs(Vertex vi, Vertex vj) {
+		
+	} // Implement this.
+	
+	public void bfs(Vertex vi, Vertex vj) {
+		if (vi.toString().equals(vj.toString())) {
+			
+		}
+	} // Implement this.
+	
+	public ArrayList<Vertex> retrievePath(Vertex vi) {
+		return null;
+	} // Implement this.
+	
+	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
+		return null;
+	} // Implement this.
+	
 	public Set<Vertex> getVertices() {return Ve;} 
 	public Set<Edge> getEdges() {return Ee;} 
 	/**
@@ -104,19 +125,24 @@ public class ExploredGraph {
 	class Edge {
 		private Vertex i, j;
 		
+		//The Edge constructor takes two vertices and sets the private
+		//vertices equal to them.
 		public Edge(Vertex vi, Vertex vj) {
 			this.i = vi;
 			this.j = vj;
 		}
 		
+		//Returns the edge in string format.
 		public String toString() {
 			return "Edge from " + i.toString() + " to " + j.toString();
 		}
 		
+		//Returns the first vertex in the edge
 		public Vertex getEndpoint1() {
 			return i;
 		}
 		
+		//Returns the second vertex in the edge
 		public Vertex getEndpoint2() {
 			return j;
 		}
