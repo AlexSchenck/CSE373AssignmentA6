@@ -176,9 +176,12 @@ public class ExploredGraph {
 			return new Function<Vertex, Vertex>() {
 				@Override
 				public Vertex apply(Vertex vertex) {
-					Function<Vertex, Boolean> asdf = getPrecondition();
+					// create new board state, commit operation
+					Vertex newVertex = new Vertex(vertex.toString());
+					newVertex.pegs.get(j).push(newVertex.pegs.get(i).pop());
 					
-					return null;
+					// return successor board state
+					return newVertex;
 				}
 			};
 		}
@@ -186,7 +189,7 @@ public class ExploredGraph {
 		public String toString() {
 			// TODO: return a string good enough
 			// to distinguish different operators
-			return "Operator " + i + ", " + j;
+			return "Operator from peg " + i + " to peg " + j;
 		}
 	}
 
