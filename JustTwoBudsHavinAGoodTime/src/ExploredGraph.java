@@ -104,7 +104,6 @@ public class ExploredGraph {
 	class Edge {
 		public Edge(Vertex vi, Vertex vj) {
 			// Add whatever you need to here.
-			// this is a new comment test
 		}
 	}
 	
