@@ -66,16 +66,19 @@ public class ExploredGraph {
 				dfs(vi, vj);       // Visit node
 			}
 		}
-	} // Implement this.
 
-	public void dfs(Vertex vi) {
+	} // Implement this.
+	
+	public void bfs(Vertex vi, Vertex vj) {
+		path.clear();
+		bfs(vi, vj, new ArrayList<Vertex>()); 
+
+	} // Implement this.
+	
+	private void bfs(Vertex vi, Vertex vj, ArrayList<Vertex> path) {
 		
 	}
 	
-	public void bfs(Vertex vi, Vertex vj) {
-
-	} // Implement this.
-
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
 		return null;
 	} // Implement this.
@@ -83,6 +86,29 @@ public class ExploredGraph {
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
 		return null;
 	} // Implement this.
+	
+	// returns an arraylist of all vertices that are connected to given vertex
+	public ArrayList<Vertex> findConnectedVertices(Vertex vi)
+	{
+		ArrayList<Vertex> result = new ArrayList<Vertex>();
+		
+		for (Edge e : Ee)
+		{
+			String vertexString = vi.toString();
+			
+			if (e.i.toString().equals(vertexString))
+			{
+				result.add(e.j);
+			}
+			
+			if (e.j.toString().equals(vertexString) && !result.contains(e.i))
+			{
+				result.add(e.i);
+			}
+		}
+		
+		return result;
+	}
 	
 	public Set<Vertex> getVertices() {return Ve;} 
 	public Set<Edge> getEdges() {return Ee;} 
