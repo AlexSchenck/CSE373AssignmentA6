@@ -39,15 +39,34 @@ public class ExploredGraph {
 		Ee = new LinkedHashSet<Edge>();
 	}
 
-	public void initialize() {
-		// Implement this
+	public void initialize(Vertex v) {
+		Ve.add(v);
 	}
-	public int nvertices() {return 0;} // Implement this.
-	public int nedges() {return 0;}    // Implement this.
-	public void dfs(Vertex vi, Vertex vj) {} // Implement this.
-	public void bfs(Vertex vi, Vertex vj) {} // Implement this.
-	public ArrayList<Vertex> retrievePath(Vertex vi) {return null;} // Implement this.
-	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {return null;} // Implement this.
+	
+	public int nvertices() {
+		return Ve.size();
+	}
+	
+	public int nedges() {
+		return Ee.size();
+	}
+	
+	public void dfs(Vertex vi, Vertex vj) {
+		
+	} // Implement this.
+	
+	public void bfs(Vertex vi, Vertex vj) {
+		
+	} // Implement this.
+	
+	public ArrayList<Vertex> retrievePath(Vertex vi) {
+		return null;
+	} // Implement this.
+	
+	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
+		return null;
+	} // Implement this.
+	
 	public Set<Vertex> getVertices() {return Ve;} 
 	public Set<Edge> getEdges() {return Ee;} 
 	/**
