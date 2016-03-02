@@ -33,6 +33,7 @@ import java.util.function.Function;
 public class ExploredGraph {
 	Set<Vertex> Ve; // collection of explored vertices
 	Set<Edge> Ee;   // collection of explored edges
+	ArrayList<Vertex> path; // path to vj from last called search
 	
 	public ExploredGraph() {
 		Ve = new LinkedHashSet<Vertex>();
@@ -56,10 +57,13 @@ public class ExploredGraph {
 	} // Implement this.
 	
 	public void bfs(Vertex vi, Vertex vj) {
-		if (vi.toString().equals(vj.toString())) {
-			
-		}
+		path.clear();
+		bfs(vi, vj, new ArrayList<Vertex>()); 
 	} // Implement this.
+	
+	private void bfs(Vertex vi, Vertex vj, ArrayList<Vertex> path) {
+		
+	}
 	
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
 		return null;
@@ -68,6 +72,29 @@ public class ExploredGraph {
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
 		return null;
 	} // Implement this.
+	
+	// returns an arraylist of all vertices that are connected to given vertex
+	public ArrayList<Vertex> findConnectedVertices(Vertex vi)
+	{
+		ArrayList<Vertex> result = new ArrayList<Vertex>();
+		
+		for (Edge e : Ee)
+		{
+			String vertexString = vi.toString();
+			
+			if (e.i.toString().equals(vertexString))
+			{
+				result.add(e.j);
+			}
+			
+			if (e.j.toString().equals(vertexString) && !result.contains(e.i))
+			{
+				result.add(e.i);
+			}
+		}
+		
+		return result;
+	}
 	
 	public Set<Vertex> getVertices() {return Ve;} 
 	public Set<Edge> getEdges() {return Ee;} 
