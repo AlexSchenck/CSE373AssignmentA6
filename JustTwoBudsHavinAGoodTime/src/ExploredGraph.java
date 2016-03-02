@@ -84,40 +84,7 @@ public class ExploredGraph {
 	
 	private boolean bfs(Vertex vi, Vertex vj, boolean found) 
 	{
-		/*
-		// base case
-		// add this vertex to path, stop searching
-		if (vi.toString().equals(vj.toString()))
-		{
-			path.add(vj);
-			return true;
-		}
-		// recursive case
-		else
-		{
-			ArrayList<Vertex> connections = findConnectedVertices(vi);
-			
-			for (Vertex v : connections)
-			{
-				// don't revisit in the same path
-				if (!path.contains(v))
-				{
-					path.add(v);
-					
-					// found on this path, stop searching
-					if (bfs(v, vj, false))
-					{
-						return true;
-					}
-					
-					path.remove(v);
-				}
-			}
-			
-			return false;
-		}
-		*/
-		
+		// all neighboring vertices
 		ArrayList<Vertex> connections = findConnectedVertices(vi);
 		
 		// loop through all collections
@@ -131,7 +98,7 @@ public class ExploredGraph {
 			}
 		}
 		
-		// search vertex is not an immediate neighbor, recurse
+		// vj is not an immediate neighbor, recurse
 		for (Vertex v : connections)
 		{
 			path.add(v);
