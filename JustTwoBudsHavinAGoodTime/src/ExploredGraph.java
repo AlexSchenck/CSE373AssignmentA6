@@ -38,6 +38,7 @@ public class ExploredGraph {
 	public ExploredGraph() {
 		Ve = new LinkedHashSet<Vertex>();
 		Ee = new LinkedHashSet<Edge>();
+		path = new ArrayList<Vertex>();
 	}
 
 	public void initialize(Vertex v) {
@@ -83,16 +84,85 @@ public class ExploredGraph {
 	
 	public void bfs(Vertex vi, Vertex vj) {
 		path.clear();
-		bfs(vi, vj, new ArrayList<Vertex>()); 
-
+		path.add(vi);
+		
+		boolean found = bfs(vi, vj, false); 
+		
+		if (!found)
+		{
+			path.clear();
+		}
 	} // Implement this.
 	
-	private void bfs(Vertex vi, Vertex vj, ArrayList<Vertex> path) {
+	private boolean bfs(Vertex vi, Vertex vj, boolean found) 
+	{
+		/*
+		// base case
+		// add this vertex to path, stop searching
+		if (vi.toString().equals(vj.toString()))
+		{
+			path.add(vj);
+			return true;
+		}
+		// recursive case
+		else
+		{
+			ArrayList<Vertex> connections = findConnectedVertices(vi);
+			
+			for (Vertex v : connections)
+			{
+				// don't revisit in the same path
+				if (!path.contains(v))
+				{
+					path.add(v);
+					
+					// found on this path, stop searching
+					if (bfs(v, vj, false))
+					{
+						return true;
+					}
+					
+					path.remove(v);
+				}
+			}
+			
+			return false;
+		}
+		*/
 		
+		ArrayList<Vertex> connections = findConnectedVertices(vi);
+		
+		// loop through all collections
+		for (Vertex v : connections)
+		{
+			// a neighboring vertex is vj
+			if (v.toString().equals(vj.toString()))
+			{
+				path.add(v);
+				return true;
+			}
+		}
+		
+		// search vertex is not an immediate neighbor, recurse
+		for (Vertex v : connections)
+		{
+			path.add(v);
+			
+			// vj has been found on this path, stop searching
+			if (bfs(v, vj, false))
+			{
+				return true;
+			}
+			
+			path.remove(v);
+		}
+		
+		// vj does not exist
+		return false;
 	}
 	
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
-		return null;
+		return path;
 	} // Implement this.
 	
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
@@ -102,17 +172,21 @@ public class ExploredGraph {
 	// returns an arraylist of all vertices that are connected to given vertex
 	public ArrayList<Vertex> findConnectedVertices(Vertex vi)
 	{
+		// all immediately connecting vertices
 		ArrayList<Vertex> result = new ArrayList<Vertex>();
 		
+		// loop through all edges
 		for (Edge e : Ee)
 		{
 			String vertexString = vi.toString();
 			
-			if (e.i.toString().equals(vertexString))
+			// if there is an edge from this vertex, add the end vertex
+			if (e.i.toString().equals(vertexString) && !result.contains(e.j))
 			{
 				result.add(e.j);
 			}
 			
+			// if there is an edge to this vertex, add the start vertex
 			if (e.j.toString().equals(vertexString) && !result.contains(e.i))
 			{
 				result.add(e.i);
