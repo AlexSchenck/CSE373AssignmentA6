@@ -56,7 +56,9 @@ public class ExploredGraph {
 	} // Implement this.
 	
 	public void bfs(Vertex vi, Vertex vj) {
-		
+		if (vi.toString().equals(vj.toString())) {
+			
+		}
 	} // Implement this.
 	
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
@@ -123,19 +125,24 @@ public class ExploredGraph {
 	class Edge {
 		private Vertex i, j;
 		
+		//The Edge constructor takes two vertices and sets the private
+		//vertices equal to them.
 		public Edge(Vertex vi, Vertex vj) {
 			this.i = vi;
 			this.j = vj;
 		}
 		
+		//Returns the edge in string format.
 		public String toString() {
 			return "Edge from " + i.toString() + " to " + j.toString();
 		}
 		
+		//Returns the first vertex in the edge
 		public Vertex getEndpoint1() {
 			return i;
 		}
 		
+		//Returns the second vertex in the edge
 		public Vertex getEndpoint2() {
 			return j;
 		}
