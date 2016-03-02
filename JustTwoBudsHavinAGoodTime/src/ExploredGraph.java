@@ -33,6 +33,7 @@ import java.util.function.Function;
 public class ExploredGraph {
 	Set<Vertex> Ve; // collection of explored vertices
 	Set<Edge> Ee;   // collection of explored edges
+	ArrayList<Vertex> path; // path to vj from last called search
 	
 	public ExploredGraph() {
 		Ve = new LinkedHashSet<Vertex>();
@@ -50,17 +51,31 @@ public class ExploredGraph {
 	public int nedges() {
 		return Ee.size();
 	}
-	
-	public void dfs(Vertex vi, Vertex vj) {
 		
-	} // Implement this.
-	
-	public void bfs(Vertex vi, Vertex vj) {
+	public void dfs(Vertex vi, Vertex vj) {
 		if (vi.toString().equals(vj.toString())) {
 			
 		}
+		int j;
+
+		path.add(vi);
+//		printNode(i);
+
+		for (j = 0; j < nvertices(); j++) {
+			if (path.contains(vj)) {
+				dfs(vi, vj);       // Visit node
+			}
+		}
 	} // Implement this.
+
+	public void dfs(Vertex vi) {
+		
+	}
 	
+	public void bfs(Vertex vi, Vertex vj) {
+
+	} // Implement this.
+
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
 		return null;
 	} // Implement this.
@@ -79,6 +94,9 @@ public class ExploredGraph {
 		// Test the vertex constructor: 
 		Vertex v0 = eg.new Vertex("[[4,3,2,1],[],[]]");
 		System.out.println(v0);
+		
+		eg.initialize(v0);
+		
 		// Add your own tests here.
 		// The autograder code will be used to test your basic functionality later.
 
