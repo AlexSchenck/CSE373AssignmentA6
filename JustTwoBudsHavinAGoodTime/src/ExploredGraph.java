@@ -128,13 +128,47 @@ public class ExploredGraph {
 		return false;
 	}
 	
-	public ArrayList<Vertex> retrievePath(Vertex vi) {
-		return path;
-	} // Implement this.
+	public ArrayList<Vertex> retrievePath(Vertex vi) {	
+		ArrayList<Vertex> result = null;
+		
+		if (path.contains(vi))
+		{
+			result = new ArrayList<Vertex>();
+			
+			for (Vertex v : path)
+			{
+				result.add(v);
+				
+				if (v.toString().equals(vi))
+				{
+					break;
+				}
+			}
+		}
+		
+		return result;
+	}
 	
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
-		return null;
-	} // Implement this.
+		ArrayList<Vertex> result = null;
+		
+		if (path.contains(vi) && path.contains(vj))
+		{
+			result = new ArrayList<Vertex>();
+			
+			int indexOfVi = path.indexOf(vi);
+			int indexOfVj = path.indexOf(vj);
+			int earlyVertex = indexOfVi > indexOfVj ? indexOfVj : indexOfVi;
+			int laterVertex = indexOfVi > indexOfVj ? indexOfVi : indexOfVj;
+			
+			for (int i = earlyVertex; i <= laterVertex; i++)
+			{
+				result.add(path.get(i));
+			}
+		}
+		
+		return result;
+	}
 	
 	// returns an arraylist of all vertices that are connected to given vertex
 	public ArrayList<Vertex> findConnectedVertices(Vertex vi)
@@ -253,10 +287,8 @@ public class ExploredGraph {
 			this.j = j;
 		}
 
+		// returns a function that can be applied to a vertex to show whether or not it's applicable
 		Function<Vertex, Boolean> getPrecondition() {
-			// TODO: return a function that can be applied to a vertex (provided
-			// that the precondition is true) to get a "successor" vertex -- the
-			// result of making the move.
 			return new Function<Vertex, Boolean>() {
 				@Override
 				public Boolean apply(Vertex vertex) {
@@ -266,10 +298,9 @@ public class ExploredGraph {
 			};
 		}
 
+		// returns a function that can be applied to a vertex, making a successor vertex
+		// assumes precondition is met
 		Function<Vertex, Vertex> getTransition() {
-			// TODO: return a function that can be applied to a vertex (provided
-			// that the precondition is true) to get a "successor" vertex -- the 
-			// result of making the move.
 			return new Function<Vertex, Vertex>() {
 				@Override
 				public Vertex apply(Vertex vertex) {
@@ -283,9 +314,8 @@ public class ExploredGraph {
 			};
 		}
 
+		// returns a string describing this operator
 		public String toString() {
-			// TODO: return a string good enough
-			// to distinguish different operators
 			return "Operator from peg " + i + " to peg " + j;
 		}
 	}
