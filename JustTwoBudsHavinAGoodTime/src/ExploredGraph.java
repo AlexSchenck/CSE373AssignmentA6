@@ -12,8 +12,9 @@ import java.util.function.Function;
  */
 
 /**
- * @author your name(s) here.
- * Extra Credit Options Implemented, if any:  (mention them here.)
+ * @author 
+ * Alex Schenck & Harrison McDonough 
+ * Extra Credit Options Implemented, if any:  None
  * 
  * Solution to Assignment 6 in CSE 373, Winter 2016
  * University of Washington.
@@ -38,11 +39,16 @@ public class ExploredGraph {
 	public ExploredGraph() {
 		Ve = new LinkedHashSet<Vertex>();
 		Ee = new LinkedHashSet<Edge>();
-		path = new ArrayList<Vertex>();
+		path = new ArrayList<Vertex>(); //this should be a set, use a map to store the transition
+		//i.e. value a, we got here from b
 	}
 
 	public void initialize(Vertex v) {
+		//clear the path (explored vertices)
+		//clear the edges (explored edges)
+		//add v
 		Ve.add(v);
+		
 	}
 	
 	public int nvertices() {
@@ -72,7 +78,14 @@ public class ExploredGraph {
 		if (vi.toString().equals(vj.toString())) {
 			return true;
 		} else {
-			ArrayList<Vertex> list = findConnectedVertices(vi);
+			ArrayList<Vertex> list = findConnectedVertices(vi); //this should be a stack
+			//while stack not empty
+			//current = pop();
+			//if (!visited) 
+			//   mark visited
+			//   get children
+			//   add children to stack
+			//   
 			for (int i = 0; i < list.size(); i++) {
 				if (!path.contains(list.get(i))) {
 					dfs(list.get(i), vj);
@@ -97,7 +110,7 @@ public class ExploredGraph {
 	private boolean bfs(Vertex vi, Vertex vj, boolean found) 
 	{
 		// all neighboring vertices
-		ArrayList<Vertex> connections = findConnectedVertices(vi);
+		ArrayList<Vertex> connections = findConnectedVertices(vi); //queue
 		
 		// loop through all collections
 		for (Vertex v : connections)
@@ -128,7 +141,9 @@ public class ExploredGraph {
 		return false;
 	}
 	
-	public ArrayList<Vertex> retrievePath(Vertex vi) {	
+	public ArrayList<Vertex> retrievePath(Vertex vi) {
+		//OH: uses the last search used to get to that specific node (vi)
+		//
 		ArrayList<Vertex> result = null;
 		
 		if (path.contains(vi))
@@ -150,6 +165,7 @@ public class ExploredGraph {
 	}
 	
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
+		//OH: uses bfs. change this to call a bfs
 		ArrayList<Vertex> result = null;
 		
 		if (path.contains(vi) && path.contains(vj))
@@ -287,6 +303,14 @@ public class ExploredGraph {
 			this.j = j;
 		}
 
+		// since it's implicit graph, use these to get adjacent vertices.
+		//with implicit, we only know v0, use preCondition and getTransition to find vertices
+		//once we get an edge and vertex store them in Ve and Ee
+		//"every time we search we build that on the fly"
+		//
+		//gameplan - run through each precondition, if applicable then apply. store the returned vertex in Ve
+		//and store a new edge of vertex to new vertex in Ee
+		
 		// returns a function that can be applied to a vertex to show whether or not it's applicable
 		Function<Vertex, Boolean> getPrecondition() {
 			return new Function<Vertex, Boolean>() {
@@ -298,6 +322,7 @@ public class ExploredGraph {
 			};
 		}
 
+		//
 		// returns a function that can be applied to a vertex, making a successor vertex
 		// assumes precondition is met
 		Function<Vertex, Vertex> getTransition() {
