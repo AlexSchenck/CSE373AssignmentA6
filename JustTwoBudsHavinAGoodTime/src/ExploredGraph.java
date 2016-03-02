@@ -54,20 +54,32 @@ public class ExploredGraph {
 	}
 		
 	public void dfs(Vertex vi, Vertex vj) {
-		if (vi.toString().equals(vj.toString())) {
-			
+//		if (vi.toString().equals(vj.toString())) {
+//			
+//		}
+		boolean found = dfsHelper(vi, vj);
+		if (found) {
+			System.out.println("The vertex was found");
+		} else {
+			path.clear();
+			path = null;
+			System.out.println("The vertex was not found");
 		}
-		int j;
-
+	}
+	
+	private boolean dfsHelper(Vertex vi, Vertex vj) {
 		path.add(vi);
-//		printNode(i);
-
-		for (j = 0; j < nvertices(); j++) {
-			if (path.contains(vj)) {
-				dfs(vi, vj);       // Visit node
+		if (vi.toString().equals(vj.toString())) {
+			return true;
+		} else {
+			ArrayList<Vertex> list = findConnectedVertices(vi);
+			for (int i = 0; i < list.size(); i++) {
+				if (!path.contains(list.get(i))) {
+					dfs(list.get(i), vj);
+				}
 			}
+			return false;
 		}
-
 	} // Implement this.
 	
 	public void bfs(Vertex vi, Vertex vj) {
