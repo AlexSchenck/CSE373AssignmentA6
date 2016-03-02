@@ -102,8 +102,23 @@ public class ExploredGraph {
 	}
 	
 	class Edge {
+		private Vertex i, j;
+		
 		public Edge(Vertex vi, Vertex vj) {
-			// Add whatever you need to here.
+			this.i = vi;
+			this.j = vj;
+		}
+		
+		public String toString() {
+			return "Edge from " + i.toString() + " to " + j.toString();
+		}
+		
+		public Vertex getEndpoint1() {
+			return i;
+		}
+		
+		public Vertex getEndpoint2() {
+			return j;
 		}
 	}
 	
