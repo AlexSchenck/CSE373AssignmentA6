@@ -216,24 +216,13 @@ public class ExploredGraph {
 	
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
 		//OH: uses bfs. change this to call a bfs
-		ArrayList<Vertex> result = null;
-		
-		if (path.contains(vi) && path.contains(vj))
-		{
-			result = new ArrayList<Vertex>();
-			
-			int indexOfVi = path.indexOf(vi);
-			int indexOfVj = path.indexOf(vj);
-			int earlyVertex = indexOfVi > indexOfVj ? indexOfVj : indexOfVi;
-			int laterVertex = indexOfVi > indexOfVj ? indexOfVi : indexOfVj;
-			
-			for (int i = earlyVertex; i <= laterVertex; i++)
-			{
-				result.add(path.get(i));
-			}
+		initialize(vi);
+		bfs(vi, vj);
+		if(Ve.contains(vj)) {
+			//return arraylist
+		} else {
+			return null;
 		}
-		
-		return result;
 	}
 	
 	// returns an arraylist of all vertices that are connected to given vertex
