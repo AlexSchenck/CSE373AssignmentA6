@@ -120,7 +120,38 @@ public class ExploredGraph {
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
 		//OH: uses the last search used to get to that specific node (vi)
 		//
-		return null;
+		if (Ve.contains(vi))
+		{	
+			// find start node
+			Set<Vertex> keys = path.keySet();
+			Set<Vertex> values = (Set<Vertex>) path.values();
+			Vertex start = null;
+			
+			for (Vertex v : keys) {
+				if (!values.contains(v)) {
+					start = v;
+				}
+			}
+			
+			ArrayList<Vertex> result = new ArrayList<Vertex>();
+			Vertex vertexIndex = start;
+			boolean done = false;
+			
+			while (!done) {
+				result.add(vertexIndex);
+				
+				if (vertexIndex.toString().equals(vi.toString())) {
+					done = true;
+				}
+				else {
+					vertexIndex = path.get(vertexIndex);
+				}
+			}
+			
+			return result;
+		} else {
+			return null;
+		}
 	}
 	
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
@@ -128,7 +159,23 @@ public class ExploredGraph {
 		initialize(vi);
 		bfs(vi, vj);
 		if(Ve.contains(vj)) {
-			//return arraylist
+			// iterate through map, constructing ArrayList
+			ArrayList<Vertex> result = new ArrayList<Vertex>();
+			Vertex vertexIndex = vi;
+			boolean done = false;
+			
+			while (!done) {
+				result.add(vertexIndex);
+				
+				if (vertexIndex.toString().equals(vj.toString())) {
+					done = true;
+				}
+				else {
+					vertexIndex = path.get(vertexIndex);
+				}
+			}
+			
+			return result;
 		} else {
 			return null;
 		}
