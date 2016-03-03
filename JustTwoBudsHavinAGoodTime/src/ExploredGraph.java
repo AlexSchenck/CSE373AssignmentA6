@@ -97,34 +97,8 @@ public class ExploredGraph {
 				}
 			}
 		}
-		
-			
-//		boolean found = dfsHelper(vi, vj);
-//		if (found) {
-//			System.out.println("The vertex was found");
-//		} else {
-//			path.clear();
-//			path = null;
-//			System.out.println("The vertex was not found");
-//		}
 	}
-	/*
-	private boolean dfsHelper(Vertex vi, Vertex vj) {
-		path.add(vi);
-		if (vi.toString().equals(vj.toString())) {
-			return true;
-		} else {
-			ArrayList<Vertex> list = findConnectedVertices(vi); //this should be a stack
-
-			for (int i = 0; i < list.size(); i++) {
-				if (!path.contains(list.get(i))) {
-					dfs(list.get(i), vj);
-				}
-			}
-			return false;
-		}
-	} // Implement this.
-	*/
+	
 	public void bfs(Vertex vi, Vertex vj) {
 		Queue<Vertex> fringe = new LinkedList<Vertex>();
 		fringe.add(vi);
@@ -141,126 +115,17 @@ public class ExploredGraph {
 				}
 			}
 		}
-		
-		
-//		path.clear();
-//		path.add(vi);
-//		
-//		boolean found = bfs(vi, vj, false); 
-//		
-//		if (!found)
-//		{
-//			path.clear();
-//		}
-	} // Implement this.
-	/*
-	private boolean bfs(Vertex vi, Vertex vj, boolean found) 
-	{
-		//Function f = operations.get(0).getPrecondition();
-		//Boolean fine = (Boolean) f.apply(new Vertex(""));
-		
-		// all neighboring vertices
-		ArrayList<Vertex> connections = findConnectedVertices(vi); //queue
-		
-		// loop through all collections
-		for (Vertex v : connections)
-		{
-			// a neighboring vertex is vj
-			if (v.toString().equals(vj.toString()))
-			{
-				path.add(v);
-				return true;
-			}
-		}
-		
-		// vj is not an immediate neighbor, recurse
-		for (Vertex v : connections)
-		{
-			path.add(v);
-			
-			// vj has been found on this path, stop searching
-			if (bfs(v, vj, false))
-			{
-				return true;
-			}
-			
-			path.remove(v);
-		}
-		
-		// vj does not exist
-		return false;
 	}
-	*/
+
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
 		//OH: uses the last search used to get to that specific node (vi)
 		//
-		ArrayList<Vertex> result = null;
-		
-		if (path.contains(vi))
-		{
-			result = new ArrayList<Vertex>();
-			
-			for (Vertex v : path)
-			{
-				result.add(v);
-				
-				if (v.toString().equals(vi))
-				{
-					break;
-				}
-			}
-		}
-		
-		return result;
+		return null;
 	}
 	
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
 		//OH: uses bfs. change this to call a bfs
-		ArrayList<Vertex> result = null;
-		
-		if (path.contains(vi) && path.contains(vj))
-		{
-			result = new ArrayList<Vertex>();
-			
-			int indexOfVi = path.indexOf(vi);
-			int indexOfVj = path.indexOf(vj);
-			int earlyVertex = indexOfVi > indexOfVj ? indexOfVj : indexOfVi;
-			int laterVertex = indexOfVi > indexOfVj ? indexOfVi : indexOfVj;
-			
-			for (int i = earlyVertex; i <= laterVertex; i++)
-			{
-				result.add(path.get(i));
-			}
-		}
-		
-		return result;
-	}
-	
-	// returns an arraylist of all vertices that are connected to given vertex
-	public ArrayList<Vertex> findConnectedVertices(Vertex vi)
-	{
-		// all immediately connecting vertices
-		ArrayList<Vertex> result = new ArrayList<Vertex>();
-		
-		// loop through all edges
-		for (Edge e : Ee)
-		{
-			String vertexString = vi.toString();
-			
-			// if there is an edge from this vertex, add the end vertex
-			if (e.i.toString().equals(vertexString) && !result.contains(e.j))
-			{
-				result.add(e.j);
-			}
-			
-			// if there is an edge to this vertex, add the start vertex
-			if (e.j.toString().equals(vertexString) && !result.contains(e.i))
-			{
-				result.add(e.i);
-			}
-		}
-		
-		return result;
+		return null;
 	}
 	
 	public Set<Vertex> getVertices() {return Ve;} 
