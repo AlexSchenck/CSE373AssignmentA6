@@ -37,12 +37,21 @@ public class ExploredGraph {
 	Set<Vertex> Ve; // collection of explored vertices
 	Set<Edge> Ee;   // collection of explored edges
 	ArrayList<Vertex> path; // path to vj from last called search
+	ArrayList<Operator> operations;
 	
 	public ExploredGraph() {
 		Ve = new LinkedHashSet<Vertex>();
 		Ee = new LinkedHashSet<Edge>();
 		path = new ArrayList<Vertex>(); //this should be a set, use a map to store the transition
 		//i.e. value a, we got here from b
+		operations = new ArrayList<Operator>();
+		
+		operations.add(new Operator(0, 1));
+		operations.add(new Operator(0, 2));
+		operations.add(new Operator(1, 0));
+		operations.add(new Operator(1, 2));
+		operations.add(new Operator(2, 0));
+		operations.add(new Operator(2, 1));
 	}
 
 	public void initialize(Vertex v) {
@@ -131,6 +140,9 @@ public class ExploredGraph {
 	
 	private boolean bfs(Vertex vi, Vertex vj, boolean found) 
 	{
+		//Function f = operations.get(0).getPrecondition();
+		//Boolean fine = (Boolean) f.apply(new Vertex(""));
+		
 		// all neighboring vertices
 		ArrayList<Vertex> connections = findConnectedVertices(vi); //queue
 		
