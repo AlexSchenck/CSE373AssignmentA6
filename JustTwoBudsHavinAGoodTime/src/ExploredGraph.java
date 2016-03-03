@@ -125,7 +125,13 @@ public class ExploredGraph {
 	
 	public ArrayList<Vertex> shortestPath(Vertex vi, Vertex vj) {
 		//OH: uses bfs. change this to call a bfs
-		return null;
+		initialize(vi);
+		bfs(vi, vj);
+		if(Ve.contains(vj)) {
+			//return arraylist
+		} else {
+			return null;
+		}
 	}
 	
 	public Set<Vertex> getVertices() {return Ve;} 
