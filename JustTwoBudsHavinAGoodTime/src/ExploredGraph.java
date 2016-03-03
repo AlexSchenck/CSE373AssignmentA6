@@ -1,7 +1,9 @@
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -36,13 +38,13 @@ import java.util.function.Function;
 public class ExploredGraph {
 	Set<Vertex> Ve; // collection of explored vertices
 	Set<Edge> Ee;   // collection of explored edges
-	ArrayList<Vertex> path; // path to vj from last called search
+	Map<Vertex, Vertex> path; // path to vj from last called search
 	ArrayList<Operator> operations;
 	
 	public ExploredGraph() {
 		Ve = new LinkedHashSet<Vertex>();
 		Ee = new LinkedHashSet<Edge>();
-		path = new ArrayList<Vertex>(); //this should be a set, use a map to store the transition
+		path = new HashMap<Vertex, Vertex>(); //this should be a set, use a map to store the transition
 		//i.e. value a, we got here from b
 		operations = new ArrayList<Operator>();
 		
@@ -88,6 +90,7 @@ public class ExploredGraph {
 					if ((Boolean) o.getPrecondition().apply(current)) {
 						Vertex child = o.getTransition().apply(current);
 						fringe.push(child);
+						path.put(child, current);
 					}
 				}
 			}
