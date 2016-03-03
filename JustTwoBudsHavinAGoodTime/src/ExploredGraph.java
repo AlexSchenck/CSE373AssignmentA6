@@ -78,13 +78,18 @@ public class ExploredGraph {
 		//   get children
 		//   add children to stack
 		//   
-		Stack<Vertex> list = new Stack<Vertex>();
-		list.push(vi);
-		while(!list.isEmpty()) {
-			Vertex current = list.pop();
+		Stack<Vertex> fringe = new Stack<Vertex>();
+		fringe.push(vi);
+		while(!fringe.isEmpty()) {
+			Vertex current = fringe.pop();
 			if(!Ve.contains(current)) {
 				Ve.add(current);
-//				Operator op = new Operator()
+				for(Operator o : operations) {
+					if ((Boolean) o.getPrecondition().apply(current)) {
+						Vertex child = o.getTransition().apply(current);
+						fringe.push(child);
+					}
+				}
 			}
 		}
 		
