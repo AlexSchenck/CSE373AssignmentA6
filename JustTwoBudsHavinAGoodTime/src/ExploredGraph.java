@@ -60,6 +60,8 @@ public class ExploredGraph {
 		//clear the path (explored vertices)
 		//clear the edges (explored edges)
 		//add v
+		Ve.clear();
+		Ee.clear();
 		Ve.add(v);
 		
 	}
@@ -106,7 +108,7 @@ public class ExploredGraph {
 //			System.out.println("The vertex was not found");
 //		}
 	}
-	
+	/*
 	private boolean dfsHelper(Vertex vi, Vertex vj) {
 		path.add(vi);
 		if (vi.toString().equals(vj.toString())) {
@@ -122,15 +124,21 @@ public class ExploredGraph {
 			return false;
 		}
 	} // Implement this.
-	
+	*/
 	public void bfs(Vertex vi, Vertex vj) {
-		Queue<Vertex> list = new LinkedList<Vertex>();
-		list.add(vi);
-		while(!list.isEmpty()) {
-			Vertex current = list.remove();
+		Queue<Vertex> fringe = new LinkedList<Vertex>();
+		fringe.add(vi);
+		while(!fringe.isEmpty()) {
+			Vertex current = fringe.remove();
 			if(!Ve.contains(current)) {
 				Ve.add(current);
-//				Operator op = new Operator()
+				for(Operator o : operations) {
+					if ((Boolean) o.getPrecondition().apply(current)) {
+						Vertex child = o.getTransition().apply(current);
+						fringe.add(child);
+						path.put(child, current);
+					}
+				}
 			}
 		}
 		
