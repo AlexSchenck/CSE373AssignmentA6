@@ -153,7 +153,7 @@ public class ExploredGraph {
 //			path.clear();
 //		}
 	} // Implement this.
-	
+	/*
 	private boolean bfs(Vertex vi, Vertex vj, boolean found) 
 	{
 		//Function f = operations.get(0).getPrecondition();
@@ -190,7 +190,7 @@ public class ExploredGraph {
 		// vj does not exist
 		return false;
 	}
-	
+	*/
 	public ArrayList<Vertex> retrievePath(Vertex vi) {
 		//OH: uses the last search used to get to that specific node (vi)
 		//
